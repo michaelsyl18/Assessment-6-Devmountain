@@ -4,7 +4,6 @@ const app = express()
 app.use(cors())
 const {bots, playerRecord} = require('./data')
 const {shuffleArray} = require('./utils')
-
 app.use(express.json())
 app.use(express.static(`${__dirname}/public`))
 
@@ -23,7 +22,7 @@ rollbar.log('Hello world!')
 
 app.get('/api/robots', (req, res) => {
     try {
-        rollbar.info("See All Bots button pressed")
+        rollbar.info("See All Autobots")
         res.status(200).send(bots)
     } catch (error) {
         console.log('ERROR GETTING BOTS', error)
@@ -36,7 +35,7 @@ app.get('/api/robots/five', (req, res) => {
         let shuffled = shuffleArray(bots)
         let choices = shuffled.slice(0, 5)
         let compDuo = shuffled.slice(6, 8)
-        rollbar.info("Random 5 generated")
+        rollbar.info("Random 5 bots shuffle")
         res.status(200).send({choices, compDuo})
     } catch (error) {
         console.log('ERROR GETTING FIVE BOTS', error)
@@ -66,10 +65,10 @@ app.post('/api/duel', (req, res) => {
         if (compHealthAfterAttack > playerHealthAfterAttack) {
             playerRecord.losses++
             res.status(200).send('You lost!')
-            rollbar.info("Player Lost!")
+            rollbar.info("Loser!")
         } else {
             playerRecord.losses++
-            rollbar.info("Player Won!")
+            rollbar.info("Winner!")
             res.status(200).send('You won!')
         }
     } catch (error) {
@@ -88,5 +87,5 @@ app.get('/api/player', (req, res) => {
 })
 
 app.listen(4000, () => {
-  console.log(`Listening on 4000`)
+    console.log(`Listening on 4000`)
 })

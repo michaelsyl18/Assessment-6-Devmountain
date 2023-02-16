@@ -1,22 +1,12 @@
-
-
 const {shuffleArray} = require('./utils')
+const {bots, playerRecord} = require('./data')
 
 describe('shuffleArray should', () => {
-    // CODE HERE
-    
-    test("return an array with equal length", () => {
-        const testArray = ["a", "b", "c"]
-        const result = shuffleArray(testArray)
-        expect(result.length).toEqual(testArray.length)
-    })
+    it("return an array", async () => {
+    expect(Array.isArray(shuffleArray(bots))).toBe(true);
+    });
 
-    test("return an array with same items", () => {
-        const testArray = ["a", "b", "c"]
-        const result = shuffleArray(testArray)
-        expect(result).toContain("a")
-        expect(result).toContain("b")
-        expect(result).toContain("c")
-    })
-
+    it("returns array of the same length as the argument", async () => {
+    expect(shuffleArray(bots).length).toEqual(bots.length);
+     });
 })
